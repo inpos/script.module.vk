@@ -7,12 +7,12 @@ from vk.logs import LOGGING_CONFIG
 from vk.utils import stringify_values, json_iter_parse, LoggingSession, str_type
 from vk.exceptions import VkAuthError, VkAPIError
 from vk.mixins import AuthMixin, InteractiveMixin
-
+from sys import version_info
 
 VERSION = '2.0.2'
 
-
-logging.config.dictConfig(LOGGING_CONFIG)
+if version_info.major >= 2 and version_info.minor >= 7:     # http://xbmc.ru/forum/showpost.php?p=107619&postcount=20
+    logging.config.dictConfig(LOGGING_CONFIG)
 logger = logging.getLogger('vk')
 
 
@@ -44,7 +44,7 @@ class Session(object):
     def access_token(self, value):
         self._access_token = value
         if isinstance(value, str_type) and len(value) >= 12:
-            self.censored_access_token = '{}***{}'.format(value[:4], value[-4:])
+            self.censored_access_token = '{0}***{1}'.format(value[:4], value[-4:]) # http://xbmc.ru/forum/showpost.php?p=107619&postcount=20
         else:
             self.censored_access_token = value
         logger.debug('access_token = %r', self.censored_access_token)

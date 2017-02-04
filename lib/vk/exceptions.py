@@ -33,7 +33,7 @@ class VkAPIError(VkException):
     @staticmethod
     def get_pretty_request_params(error_data):
         request_params = error_data.get('request_params', ())
-        request_params = {param['key']: param['value'] for param in request_params}
+        request_params = dict((param['key'], param['value']) for param in request_params) # http://xbmc.ru/forum/showpost.php?p=107615&postcount=16
         return request_params
 
     def is_access_token_incorrect(self):
