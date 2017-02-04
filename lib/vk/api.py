@@ -11,7 +11,7 @@ from sys import version_info
 
 VERSION = '2.0.2'
 
-if version_info.major >= 2 and version_info.minor >= 7:     # http://xbmc.ru/forum/showpost.php?p=107619&postcount=20
+if version_info[0] >= 2 and version_info[1] >= 7:     # http://xbmc.ru/forum/showpost.php?p=107619&postcount=20
     logging.config.dictConfig(LOGGING_CONFIG)
 logger = logging.getLogger('vk')
 
